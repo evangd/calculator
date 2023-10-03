@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #calculator {
+            margin: auto;
+            width: 400px;
+            height: 500px;
+            border: 5px solid black;
+            border-radius: 10px;
+            padding: 30px;
+        }
+
+        #display {
+            width: 75%;
+            padding: 15px;
+            display: block;
+            margin: auto;
+            margin-bottom: 30px;
+            border: 2px solid black;
+        }
+
+        #keyboard {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: space-around;
+        }
+
+        /* buttons */
+
+        button {
+            cursor: pointer;
+        }
+
+        .numkey, .opkey {
+            width: 65px;
+            height: 65px;
+        }
+
+        .numkey {
+            background-color: white;
+        }
+
+        .opkey {
+            
+        }
+
+        #eq {
+            height: 100px;
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+    <div id="calculator">
+        <input id="display">
+        <div id="keyboard">
+     
+            <button id="1" class="numkey">1</button>
+            <button id="2" class="numkey">2</button>
+            <button id="3" class="numkey">3</button>
+            <button id="+" class="opkey">+</button>
+
+            <button id="4" class="numkey">4</button>
+            <button id="5" class="numkey">5</button>
+            <button id="6" class="numkey">6</button>
+            <button id="-" class="opkey">-</button>
+
+            <button id="7" class="numkey">7</button>
+            <button id="8" class="numkey">8</button>
+            <button id="9" class="numkey">9</button>
+            <button id="*" class="opkey">*</button>
+
+            <button id="0" class="numkey">0</button>
+
+            
+            
+            
+            <button id="/" class="opkey">/</button>
+            <button id="eq" class="opkey">=</button>
+        </div>
+    </div>
+    <script>
+
+    </script>
+</body>
+</html>
