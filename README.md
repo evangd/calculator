@@ -1,4 +1,4 @@
-#BUGS TO FIX:
+# BUGS TO FIX:
 
 - Can't input multi-digit numbers
     - Potential fixes
