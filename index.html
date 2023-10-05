@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Electric Abacus</title>
     <style>
         #calculator {
             margin: auto;
             width: 400px;
-            height: 500px;
+            height: 600px;
             border: 5px solid black;
             border-radius: 10px;
             padding: 30px;
@@ -39,19 +39,34 @@
         .numkey, .opkey {
             width: 65px;
             height: 65px;
+
+            border: 1px solid black;
         }
 
         .numkey {
             background-color: white;
         }
 
+        .numkey:active {
+            background-color: #eeeeee;
+        }
+
         .opkey {
-            
+            background-color: lightblue;
+        }
+
+        .opkey:active {
+            background-color: #72bcd4;
         }
 
         #eq {
             height: 100px;
-            background-color: lightblue;
+            background-color: lightgreen;
+            margin-left: auto;
+        }
+
+        #eq:active {
+            background-color: #4ee44e;
         }
     </style>
 </head>
@@ -75,17 +90,62 @@
             <button id="9" class="numkey">9</button>
             <button id="*" class="opkey">*</button>
 
+            <button id="ac" class="opkey">AC</button>
             <button id="0" class="numkey">0</button>
-
-            
-            
-            
+            <button id="del" class="opkey">DEL</button>
             <button id="/" class="opkey">/</button>
+
             <button id="eq" class="opkey">=</button>
         </div>
     </div>
     <script>
+        // Math functions
+        function add(x, y) {
+            return x + y;
+        }
 
+        function subtract(x, y) {
+            return x - y;
+        }
+
+        function multiply(x, y) {
+            return x * y;
+        }
+
+        function divide(x, y) {
+            if (y === 0) {
+                alert("You divided by 0 ... \
+                and 0 don't like to get divided by nobody except Mrs. 0.")
+            }
+
+            return x / y;
+        }
+
+        // operate function
+
+        function operate(x, y, op) {
+            return op(x, y);
+        }
+
+        // calculator event handling
+
+        const keys = document.querySelectorAll('.numkey, .opkey');
+
+        keys.forEach(key => {
+            key.addEventListener('click', e => {
+                fillDisplay(e.target.id);
+            });
+            key.addEventListener('keydown', e => {
+                fillDisplay(e.target.id);
+            });
+        });
+
+
+        // put numbers on calculator and prep for operations
+
+        function fillDisplay(key) {
+
+        }
     </script>
 </body>
 </html>
