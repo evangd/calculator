@@ -131,20 +131,69 @@
 
         const keys = document.querySelectorAll('.numkey, .opkey');
 
+        const display = [];
+
         keys.forEach(key => {
             key.addEventListener('click', e => {
                 fillDisplay(e.target.id);
             });
-            key.addEventListener('keydown', e => {
-                fillDisplay(e.target.id);
-            });
+            
+            // Add keyboard events
         });
 
 
         // put numbers on calculator and prep for operations
 
         function fillDisplay(key) {
+            if (isSecondOperator(key)) {
+                calculate(key);
+            } else {
+                display.push(key);
+            }
+        }
 
+        // process display values
+
+        function calculate(key) {
+
+            let opFunction;
+
+            switch (display[1]) {
+                case '+':
+                    opFunction = add;
+                    break;
+                case '-':
+                    opFunction = subtract;
+                    break;
+                case '*':
+                    opFunction = multiply;
+                    break;
+                case '/':
+                    opFunction = divide;
+                    break;
+            }
+            
+            const ans = operate(display[0], display[2], opFunction);
+
+            for (let i = 0; i < 3; ++i) {
+                display.pop();
+            }
+
+            display.push(ans);
+            if (key !== 'eq') {
+                display.push(key);
+            }
+        }
+
+        // function to determine if opkey needs to act as equals
+
+        function isSecondOperator(key) {
+            if (display.length === 3 && (key === 'eq' || key === '+' 
+            || key === '-' || key === '*' || key === '/')) {
+                return true;
+            } else {
+                return false;
+            }
         }
     </script>
 </body>
