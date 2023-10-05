@@ -21,6 +21,7 @@
             margin: auto;
             margin-bottom: 30px;
             border: 2px solid black;
+            text-align: right;
         }
 
         #keyboard {
@@ -130,25 +131,33 @@
         // calculator event handling
 
         const keys = document.querySelectorAll('.numkey, .opkey');
+        const screen = document.querySelector('#display');
 
         const display = [];
 
         keys.forEach(key => {
             key.addEventListener('click', e => {
-                fillDisplay(e.target.id);
+                fillDisplay(e.target);
             });
             
             // Add keyboard events
+        });
+
+        // clear button
+        document.querySelector('#ac').addEventListener('click', () => {
+            screen.value = "";
+            display.splice(0, display.length);
         });
 
 
         // put numbers on calculator and prep for operations
 
         function fillDisplay(key) {
-            if (isSecondOperator(key)) {
-                calculate(key);
+            if (isSecondOperator(key.id)) {
+                calculate(key.id);
             } else {
-                display.push(key);
+                display.push(key.id);
+                screen.value += key.textContent;
             }
         }
 
@@ -175,9 +184,7 @@
             
             const ans = operate(display[0], display[2], opFunction);
 
-            for (let i = 0; i < 3; ++i) {
-                display.pop();
-            }
+            display.splice(0, display.length);
 
             display.push(ans);
             if (key !== 'eq') {
