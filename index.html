@@ -22,6 +22,8 @@
             margin-bottom: 30px;
             border: 2px solid black;
             text-align: right;
+            font-family: monospace;
+            font-size: 18px;
         }
 
         #keyboard {
@@ -137,7 +139,17 @@
 
         keys.forEach(key => {
             key.addEventListener('click', e => {
-                fillDisplay(e.target);
+                if (e.target.id === 'ac') {
+                    screen.value = "";
+                    display.splice(0, display.length);
+                } else if (e.target.id === 'del') {
+                    screen.value = screen.value.slice(0, -2);
+                    display.pop();
+                } else {
+                    fillDisplay(e.target);
+                }
+
+                console.table(display);
             });
             
             // Add keyboard events
@@ -145,8 +157,7 @@
 
         // clear button
         document.querySelector('#ac').addEventListener('click', () => {
-            screen.value = "";
-            display.splice(0, display.length);
+            
         });
 
 
@@ -157,7 +168,7 @@
                 calculate(key.id);
             } else {
                 display.push(key.id);
-                screen.value += key.textContent;
+                screen.value += ' ' + key.textContent;
             }
         }
 
@@ -182,7 +193,7 @@
                     break;
             }
             
-            const ans = operate(display[0], display[2], opFunction);
+            const ans = operate(Number(display[0]), Number(display[2]), opFunction);
 
             display.splice(0, display.length);
 
@@ -190,6 +201,8 @@
             if (key !== 'eq') {
                 display.push(key);
             }
+
+            screen.value = display[0];
         }
 
         // function to determine if opkey needs to act as equals
