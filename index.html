@@ -143,8 +143,15 @@
                     screen.value = "";
                     display.splice(0, display.length);
                 } else if (e.target.id === 'del') {
-                    screen.value = screen.value.slice(0, -2);
                     display.pop();
+                    screen.value = '';
+                    for (let i = 0; i < display.length; ++i) {
+                        screen.value += display[i] + ' ';
+                    }
+
+                    if (!isOpKey(display[display.length - 1])) {
+                        screen.value = screen.value.slice(0, -1);
+                    }
                 } else {
                     fillDisplay(e.target);
                 }
@@ -155,20 +162,27 @@
             // Add keyboard events
         });
 
-        // clear button
-        document.querySelector('#ac').addEventListener('click', () => {
-            
-        });
-
-
         // put numbers on calculator and prep for operations
 
         function fillDisplay(key) {
-            if (isSecondOperator(key.id)) {
-                calculate(key.id);
+            if (isOpKey(key.id)) {
+                if (display.length === 3) { //check if opkey is 2nd or more in chain
+                    calculate(key.id);
+                } else {
+                    display.push(key.id);
+                }
+
+                if (key.id !== 'eq') {
+                    screen.value += ' ' + key.textContent + ' ';
+                }
             } else {
-                display.push(key.id);
-                screen.value += ' ' + key.textContent;
+                if (display.length === 0 || display.length === 2) {
+                    display.push(key.textContent);
+                } else {
+                    display[display.length - 1] += key.textContent;
+                }
+                
+                screen.value += key.textContent;
             }
         }
 
@@ -207,9 +221,9 @@
 
         // function to determine if opkey needs to act as equals
 
-        function isSecondOperator(key) {
-            if (display.length === 3 && (key === 'eq' || key === '+' 
-            || key === '-' || key === '*' || key === '/')) {
+        function isOpKey(key) {
+            if (key === 'eq' || key === '+' 
+            || key === '-' || key === '*' || key === '/') {
                 return true;
             } else {
                 return false;
